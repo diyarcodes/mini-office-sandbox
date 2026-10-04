@@ -1,0 +1,15 @@
+{
+  "name": "mini-office-sandbox",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tiny TypeScript utility library — the codebase the Mini Office AI team works on",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.9"
+  }
+}
