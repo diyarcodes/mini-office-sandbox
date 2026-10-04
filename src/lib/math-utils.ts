@@ -19,6 +19,18 @@ export function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
 }
 
+/**
+ * Computes the arithmetic mean of `values`.
+ *
+ * @param values - The numbers to average.
+ * @returns The sum of `values` divided by its length.
+ * @throws {@link RangeError} When `values` is empty.
+ */
+export function average(values: number[]): number {
+  if (values.length === 0) throw new RangeError("values must not be empty");
+  return values.reduce((total, v) => total + v, 0) / values.length;
+}
+
 /** Round `v` to `digits` decimal places (default 0). */
 export function roundTo(v: number, digits = 0): number {
   const f = 10 ** digits;

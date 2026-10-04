@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { clamp, lerp, roundTo } from "../src/lib/math-utils.js";
+import { average, clamp, lerp, roundTo } from "../src/lib/math-utils.js";
 
 describe("clamp", () => {
   it("keeps in-range values", () => {
@@ -32,6 +32,18 @@ describe("lerp", () => {
   });
   it("interpolates midway", () => {
     expect(lerp(1, 3, 0.5)).toBe(2);
+  });
+});
+
+describe("average", () => {
+  it("computes the arithmetic mean", () => {
+    expect(average([1, 2, 3, 4])).toBe(2.5);
+  });
+  it("cancels out symmetric negative values", () => {
+    expect(average([-1, 1])).toBe(0);
+  });
+  it("rejects an empty array", () => {
+    expect(() => average([])).toThrow(RangeError);
   });
 });
 
