@@ -18,3 +18,27 @@ export function chunk<T>(arr: T[], size: number): T[][] {
   }
   return chunks;
 }
+
+/**
+ * Groups the elements of `arr` by the key returned from `keyFn`.
+ *
+ * @typeParam T - Element type of the input array.
+ * @typeParam K - Key type returned by `keyFn`.
+ * @param arr - The array to group (not mutated).
+ * @param keyFn - Returns the group key for an element.
+ * @returns A new object mapping each key to the elements that produced it.
+ *   Keys appear in first-appearance order and elements keep their original
+ *   order within a group. Keys are stringified, so `undefined` (and `null`)
+ *   group under `'undefined'` / `'null'`.
+ */
+export function groupBy<T, K extends PropertyKey>(
+  arr: T[],
+  keyFn: (item: T) => K,
+): Record<string, T[]> {
+  const groups: Record<string, T[]> = {};
+  for (const item of arr) {
+    const key = String(keyFn(item));
+    (groups[key] ??= []).push(item);
+  }
+  return groups;
+}
