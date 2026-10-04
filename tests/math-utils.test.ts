@@ -11,6 +11,13 @@ describe("clamp", () => {
   it("clamps above", () => {
     expect(clamp(42, 0, 10)).toBe(10);
   });
+  it("keeps the bounds themselves", () => {
+    expect(clamp(0, 0, 10)).toBe(0);
+    expect(clamp(10, 0, 10)).toBe(10);
+  });
+  it("rejects min > max", () => {
+    expect(() => clamp(5, 10, 0)).toThrow(RangeError);
+  });
 });
 
 describe("lerp", () => {
