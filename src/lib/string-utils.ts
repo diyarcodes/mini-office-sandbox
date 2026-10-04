@@ -1,7 +1,8 @@
 /** String utilities — small, pure helpers. */
 
-/** Uppercase the first character of `s` (rest unchanged). */
+/** Uppercase the first character of `s` (rest unchanged). Throws TypeError for non-string input. */
 export function capitalize(s: string): string {
+  if (typeof s !== "string") throw new TypeError("input must be a string");
   if (s.length === 0) return s;
   return s[0]!.toUpperCase() + s.slice(1);
 }
