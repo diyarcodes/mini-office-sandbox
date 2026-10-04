@@ -4,12 +4,14 @@ import { clamp, lerp, roundTo } from "../src/lib/math-utils.js";
 describe("clamp", () => {
   it("keeps in-range values", () => {
     expect(clamp(5, 0, 10)).toBe(5);
+    expect(clamp(5, 1, 10)).toBe(5);
   });
   it("clamps below", () => {
     expect(clamp(-3, 0, 10)).toBe(0);
   });
   it("clamps above", () => {
     expect(clamp(42, 0, 10)).toBe(10);
+    expect(clamp(15, 0, 10)).toBe(10);
   });
   it("keeps the bounds themselves", () => {
     expect(clamp(0, 0, 10)).toBe(0);
