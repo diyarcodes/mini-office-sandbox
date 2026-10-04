@@ -18,3 +18,17 @@ export function chunk<T>(arr: T[], size: number): T[][] {
   }
   return chunks;
 }
+
+/**
+ * Returns a new array with duplicate values removed, preserving the
+ * first-occurrence order of elements. Equality follows SameValueZero, so
+ * `NaN` values deduplicate and `0` and `-0` are treated as equal.
+ *
+ * @typeParam T - Element type of the input array.
+ * @param arr - The array to deduplicate (not mutated).
+ * @returns A new array containing each distinct value once, in order of
+ *   first occurrence; empty when `arr` is empty.
+ */
+export function uniq<T>(arr: T[]): T[] {
+  return [...new Set(arr)];
+}
