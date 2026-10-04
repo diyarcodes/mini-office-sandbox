@@ -5,11 +5,17 @@ describe("capitalize", () => {
   it("uppercases the first character", () => {
     expect(capitalize("hello")).toBe("Hello");
   });
+  it("uppercases only the first character of a multi-word string", () => {
+    expect(capitalize("hello world")).toBe("Hello world");
+  });
   it("leaves the rest unchanged", () => {
     expect(capitalize("hELLO")).toBe("HELLO");
   });
   it("handles empty string", () => {
     expect(capitalize("")).toBe("");
+  });
+  it("rejects non-string input", () => {
+    expect(() => capitalize(42 as unknown as string)).toThrow(TypeError);
   });
 });
 
