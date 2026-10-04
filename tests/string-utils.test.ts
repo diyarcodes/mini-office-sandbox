@@ -35,4 +35,18 @@ describe("slugify", () => {
   it("trims leading/trailing dashes", () => {
     expect(slugify("--x--")).toBe("x");
   });
+  it("collapses runs of spaces and symbols into single hyphens", () => {
+    expect(slugify("  Multiple   spaces & symbols!! ")).toBe(
+      "multiple-spaces-symbols",
+    );
+  });
+  it("transliterates Latin diacritics", () => {
+    expect(slugify("Café Über")).toBe("cafe-uber");
+  });
+  it("returns an empty string for empty input", () => {
+    expect(slugify("")).toBe("");
+  });
+  it("returns an empty string when there are no alphanumerics", () => {
+    expect(slugify(" &!! ")).toBe("");
+  });
 });

@@ -14,7 +14,17 @@ export function truncate(s: string, max: number, suffix = "…"): string {
   return cut + suffix;
 }
 
-/** Convert a string into a URL slug: lowercase, non-alphanumerics → dashes, trimmed. */
+/**
+ * Converts `s` into a URL-safe slug.
+ *
+ * Trims surrounding whitespace, lowercases, transliterates common Latin
+ * diacritics to their base letter (e.g. é → e), collapses each run of
+ * non-alphanumeric characters into a single hyphen, and strips leading and
+ * trailing hyphens.
+ *
+ * @param s - The string to slugify.
+ * @returns The URL-safe slug; empty when `s` contains no alphanumerics.
+ */
 export function slugify(s: string): string {
   return s
     .toLowerCase()
