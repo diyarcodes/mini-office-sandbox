@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { clamp, lerp, roundTo, sum } from "../src/lib/math-utils.js";
+import { average, clamp, lerp, roundTo, sum } from "../src/lib/math-utils.js";
 
 describe("clamp", () => {
   it("keeps in-range values", () => {
@@ -60,6 +60,30 @@ describe("sum", () => {
   it("does not mutate the input", () => {
     const values = [1, 2, 3];
     sum(values);
+    expect(values).toEqual([1, 2, 3]);
+  });
+});
+
+describe("average", () => {
+  it("returns the mean", () => {
+    expect(average([1, 2, 3, 4])).toBe(2.5);
+  });
+  it("cancels out to zero for symmetric values", () => {
+    expect(average([-1, 1])).toBe(0);
+  });
+  it("throws RangeError for an empty array instead of returning NaN", () => {
+    expect(() => average([])).toThrow(RangeError);
+  });
+  it("returns the value itself for a single element", () => {
+    expect(average([4.25])).toBe(4.25);
+  });
+  it("handles negatives and decimals", () => {
+    expect(average([-2, -1, 0, 3])).toBe(0);
+    expect(average([1.5, 2.5])).toBe(2);
+  });
+  it("does not mutate the input", () => {
+    const values = [1, 2, 3];
+    average(values);
     expect(values).toEqual([1, 2, 3]);
   });
 });
