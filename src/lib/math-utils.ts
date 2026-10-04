@@ -24,3 +24,13 @@ export function roundTo(v: number, digits = 0): number {
   const f = 10 ** digits;
   return Math.round(v * f) / f;
 }
+
+/**
+ * Adds up all the numbers in `values`.
+ *
+ * @param values - The numbers to add up.
+ * @returns Their total, or `0` for an empty array.
+ */
+export function sum(values: number[]): number {
+  return values.reduce((total, v) => total + v, 0);
+}

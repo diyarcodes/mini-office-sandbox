@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { clamp, lerp, roundTo } from "../src/lib/math-utils.js";
+import { clamp, lerp, roundTo, sum } from "../src/lib/math-utils.js";
 
 describe("clamp", () => {
   it("keeps in-range values", () => {
@@ -41,5 +41,25 @@ describe("roundTo", () => {
   });
   it("rounds to N decimals", () => {
     expect(roundTo(3.14159, 2)).toBe(3.14);
+  });
+});
+
+describe("sum", () => {
+  it("returns 0 for an empty array", () => {
+    expect(sum([])).toBe(0);
+  });
+  it("adds positive integers", () => {
+    expect(sum([1, 2, 3])).toBe(6);
+  });
+  it("handles negatives and decimals", () => {
+    expect(sum([-1, 2.5, -0.5])).toBe(1);
+  });
+  it("returns the value itself for a single element", () => {
+    expect(sum([4.25])).toBe(4.25);
+  });
+  it("does not mutate the input", () => {
+    const values = [1, 2, 3];
+    sum(values);
+    expect(values).toEqual([1, 2, 3]);
   });
 });
