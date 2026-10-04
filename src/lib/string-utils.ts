@@ -14,11 +14,17 @@ export function truncate(s: string, max: number, suffix = "…"): string {
   return cut + suffix;
 }
 
-/** Convert a string into a URL slug: lowercase, non-alphanumerics → dashes, trimmed. */
+/**
+ * Convert a string into a URL-safe slug: trimmed and lowercased, common Latin
+ * diacritics transliterated to their base letter (é → e), and each run of
+ * non-alphanumeric characters collapsed to a single hyphen. Leading and
+ * trailing hyphens are stripped, so `slugify("!!")` returns "".
+ */
 export function slugify(s: string): string {
   return s
     .toLowerCase()
     .normalize("NFKD")
+    // Strip combining marks left by NFKD (U+0300–U+036F), i.e. é → e.
     .replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
