@@ -18,6 +18,7 @@ describe("clamp", () => {
     expect(clamp(10, 0, 10)).toBe(10);
   });
   it("rejects min > max", () => {
+    expect(() => clamp(1, 10, 0)).toThrow(RangeError);
     expect(() => clamp(5, 10, 0)).toThrow(RangeError);
   });
 });
