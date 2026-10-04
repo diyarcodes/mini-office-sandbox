@@ -34,3 +34,15 @@ export function roundTo(v: number, digits = 0): number {
 export function sum(values: number[]): number {
   return values.reduce((total, v) => total + v, 0);
 }
+
+/**
+ * Returns the arithmetic mean of `values`, computed via `sum`.
+ *
+ * @param values - The numbers to average.
+ * @returns Their mean.
+ * @throws {@link RangeError} When `values` is empty (rather than returning `NaN`).
+ */
+export function average(values: number[]): number {
+  if (values.length === 0) throw new RangeError("values must not be empty");
+  return sum(values) / values.length;
+}
